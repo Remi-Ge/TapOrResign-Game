@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 1683195427}
   - component: {fileID: 1683195426}
   m_Layer: 5
-  m_Name: LevelsText
+  m_Name: CommunityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
