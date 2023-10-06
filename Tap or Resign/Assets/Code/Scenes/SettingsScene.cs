@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Scenes
 {
-    public class ShopScene : MonoBehaviour
+    public class SettingsScene : MonoBehaviour
     {
         private void Start()
         {
