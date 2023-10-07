@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1169011773498647186}
   - component: {fileID: 3803075725323557484}
   - component: {fileID: 2400107936927214986}
+  - component: {fileID: 7183324459138282950}
   m_Layer: 0
   m_Name: PersistentObject
   m_TagString: Untagged
@@ -60,3 +61,23 @@ MonoBehaviour:
   transitionObjectPrefab: {fileID: 6379071249598351873, guid: dc40c3cf4ea4ef54c97a60284703d12c, type: 3}
   sceneTransitionsSprites:
   - {fileID: 21300000, guid: b6c516e45331d3f4b89b7e080947779d, type: 3}
+--- !u!114 &7183324459138282950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169011773498647181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d1a157f9cc443bb9c78ed27b814d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyTypes:
+  - {fileID: 21300000, guid: de3d664f1bfc0bb49b181c77b2176458, type: 3}
+  bodyColors:
+  - {r: 0.5019608, g: 0, b: 0, a: 0}
+  eyeTypes:
+  - {fileID: 21300000, guid: b5b591037f5619e428259f6815100deb, type: 3}
+  eyeColors:
+  - {r: 0, g: 0, b: 0, a: 0}
