@@ -1,4 +1,4 @@
-
+using System.IO;
 
 namespace Code.SavesData
 {
@@ -6,7 +6,7 @@ namespace Code.SavesData
     {
         public static void CreateEmptySqliteFile(string sqliteFilePath)
         {
-            
+            File.WriteAllText(sqliteFilePath, "");
         }
     }
 }

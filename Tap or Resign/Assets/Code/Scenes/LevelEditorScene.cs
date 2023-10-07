@@ -18,5 +18,20 @@ namespace Code.Scenes
         {
             Persistent.GetPersistentObject().GetComponent<Transitions>().ChangeSceneWithTransition("CreatedLevels", 0, 0, 0.5f);
         }
+
+        public void DeleteButton()
+        {
+            
+        }
+
+        public void SettingsButton()
+        {
+            Persistent.GetPersistentObject().GetComponent<Transitions>().ChangeSceneWithTransition("LevelSettings", 0, 0, 0.5f);
+        }
+
+        public void PlayButton()
+        {
+            Persistent.GetPersistentObject().GetComponent<Transitions>().ChangeSceneWithTransition("EditorPlayScene", 0, 0, 0.5f);
+        }
     }
 }
