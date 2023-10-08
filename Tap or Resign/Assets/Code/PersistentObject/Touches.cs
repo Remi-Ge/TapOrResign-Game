@@ -5,20 +5,52 @@ namespace Code.PersistentObject
 {
     public class Touches : MonoBehaviour
     {
-        public List<Touch> GetBeganTouches()
+        private RuntimePlatform _usedPlatform;
+
+        private void Awake()
         {
-            List<Touch> beganTouches = new List<Touch>();
-            //loops through every touches input
-            for (int i = 0; i < Input.touchCount; i++)
+            _usedPlatform = Application.platform;
+        }
+
+        public List<TouchStruct> GetBeganTouches()
+        {
+            List<TouchStruct> beganTouches = new List<TouchStruct>();
+            if (_usedPlatform == RuntimePlatform.WindowsPlayer) //for windows
             {
-                //add to the list if the touch just began
-                if (Input.GetTouch(i).phase == TouchPhase.Began)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    beganTouches.Add(Input.GetTouch(i));
+                    beganTouches.Add(new TouchStruct()
+                    {
+                        FingerId = 0,
+                        ScreenPosition = Input.mousePosition
+                    }); 
                 }
             }
+            else //for the rest (android and ios)
+            {
+                //loops through every touches input
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    //add to the list if the touch just began
+                    if (Input.GetTouch(i).phase == TouchPhase.Began)
+                    {
+                        beganTouches.Add(new TouchStruct()
+                        {
+                            FingerId = Input.GetTouch(i).fingerId,
+                            ScreenPosition = Input.GetTouch(i).position
+                        }); 
+                    }
+                }
+            }
+            
 
             return beganTouches;
+        }
+
+        public struct TouchStruct
+        {
+            public int FingerId;
+            public Vector2 ScreenPosition;
         }
     }
 }

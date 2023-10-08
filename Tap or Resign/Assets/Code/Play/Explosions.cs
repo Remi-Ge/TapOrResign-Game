@@ -28,18 +28,18 @@ namespace Code.Play
             //checks if the game is not paused
             if (!GetComponent<PauseGame>().isPaused)
             {
-                List<Touch> beganTouches= Persistent.GetPersistentObject().GetComponent<Touches>().GetBeganTouches();
+                List<Touches.TouchStruct> beganTouches= Persistent.GetPersistentObject().GetComponent<Touches>().GetBeganTouches();
 
-                foreach (Touch beganTouch in beganTouches)
+                foreach (Touches.TouchStruct beganTouch in beganTouches)
                 {
-                    SpawnExplosion(beganTouch);
+                    SpawnExplosion(beganTouch.ScreenPosition);
                 }
             }
         }
 
-        private void SpawnExplosion(Touch newTouch)
+        private void SpawnExplosion(Vector2 newTouchPosition)
         {
-            Vector2 explosionPosition = _cameraSize.ScreenToWorldPoint(newTouch.position);
+            Vector2 explosionPosition = _cameraSize.ScreenToWorldPoint(newTouchPosition);
             Instantiate(explosionPrefab, explosionPosition, Quaternion.identity);
             //apply forces
             ApplyForces(explosionPosition);
