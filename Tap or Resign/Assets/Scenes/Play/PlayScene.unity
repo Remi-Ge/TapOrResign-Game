@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 988316057}
   - component: {fileID: 988316058}
   - component: {fileID: 988316059}
+  - component: {fileID: 988316060}
   m_Layer: 0
   m_Name: PlaySceneScene
   m_TagString: Untagged
@@ -497,7 +498,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bae76013db24840bedb88bfff5a9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
   pauseAnimator: {fileID: 1621175239}
+--- !u!114 &988316060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988316056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed35a25cd20404da114dd34f0cc087d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 4885578285192422443, guid: 7b7952bde870735439ad5d2e2b3d9ef5, type: 3}
 --- !u!1 &1350699322
 GameObject:
   m_ObjectHideFlags: 0

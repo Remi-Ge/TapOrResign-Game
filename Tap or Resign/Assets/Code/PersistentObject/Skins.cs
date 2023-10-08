@@ -13,13 +13,18 @@ namespace Code.PersistentObject
         public void ApplySkin(Transform playerTransform, SkinsStruct.SkinStruct skin)
         {
             Transform playerSpritesTransform = playerTransform.Find("sprites");
-            
-            //animation
 
             //checks if the player has no sprites game object
             if (playerSpritesTransform == null)
             {
                 return;
+            }
+            
+            //animation
+            Animator playerAnimator = playerSpritesTransform.GetComponent<Animator>();
+            if (playerAnimator != null)
+            {
+                playerAnimator.SetInteger(Animator.StringToHash("animationIndex"), skin.animationType);
             }
             
             //body
