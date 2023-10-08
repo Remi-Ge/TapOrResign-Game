@@ -77,9 +77,11 @@ MonoBehaviour:
   bodyTypes:
   - {fileID: 21300000, guid: de3d664f1bfc0bb49b181c77b2176458, type: 3}
   bodyColors:
-  - {r: 0.5019608, g: 0, b: 0, a: 0}
-  eyesTypes: []
-  eyesColors: []
+  - {r: 0.5019608, g: 0, b: 0, a: 1}
+  eyesTypes:
+  - {fileID: 21300000, guid: b5b591037f5619e428259f6815100deb, type: 3}
+  eyesColors:
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1711847612578406653
 MonoBehaviour:
   m_ObjectHideFlags: 0

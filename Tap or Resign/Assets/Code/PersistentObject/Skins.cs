@@ -13,7 +13,7 @@ namespace Code.PersistentObject
         public void ApplySkin(Transform playerTransform, SkinsStruct.SkinStruct skin)
         {
             Transform playerSpritesTransform = playerTransform.Find("sprites");
-
+        
             //checks if the player has no sprites game object
             if (playerSpritesTransform == null)
             {
@@ -35,7 +35,7 @@ namespace Code.PersistentObject
                 //check if there is a sprite renderer on the body
                 if (bodySpriteRender != null)
                 {
-                    if (skin.bodyType > bodyTypes.Length || skin.bodyType < 0) //check if bodyType is valid
+                    if (skin.bodyType < bodyTypes.Length || skin.bodyType < 0) //check if bodyType is valid
                     {
                         bodySpriteRender.sprite = bodyTypes[skin.bodyType];
                     }
@@ -44,7 +44,7 @@ namespace Code.PersistentObject
                         //apply the skin not found texture
                     }
                     
-                    if (skin.bodyColor > bodyColors.Length || skin.bodyColor < 0) //check if bodyType is valid
+                    if (skin.bodyColor < bodyColors.Length || skin.bodyColor < 0) //check if bodyType is valid
                     {
                         bodySpriteRender.color = bodyColors[skin.bodyColor];
                     }
@@ -56,7 +56,7 @@ namespace Code.PersistentObject
             }
             
             //eyes
-            Transform eyesParent = playerBodyTransform.Find("eyes");
+            Transform eyesParent = playerSpritesTransform.Find("eyes");
             //checks if the eye parent exists
             if (eyesParent != null)
             {
@@ -69,7 +69,7 @@ namespace Code.PersistentObject
 
                     if (eye1SpriteRenderer != null && eye2SpriteRenderer != null)
                     {
-                        if (skin.eyesType > eyesTypes.Length || skin.eyesType < 0) //check if bodyType is valid
+                        if (skin.eyesType < eyesTypes.Length || skin.eyesType < 0) //check if bodyType is valid
                         {
                             eye1SpriteRenderer.sprite = eyesTypes[skin.eyesType];
                             eye2SpriteRenderer.sprite = eyesTypes[skin.eyesType];
@@ -79,7 +79,7 @@ namespace Code.PersistentObject
                             //apply the skin not found texture
                         }
 
-                        if (skin.eyesColor > eyesColors.Length || skin.eyesColor < 0)
+                        if (skin.eyesColor < eyesColors.Length || skin.eyesColor < 0)
                         {
                             eye1SpriteRenderer.color = eyesColors[skin.eyesColor];
                             eye2SpriteRenderer.color = eyesColors[skin.eyesColor];

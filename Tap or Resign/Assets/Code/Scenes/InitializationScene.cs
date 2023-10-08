@@ -9,6 +9,7 @@ namespace Code.Scenes
     {
         private void Awake()
         {
+            CheckPlatform();
             StartCoroutine(WaitAndChangeScene());
         }
 
@@ -16,6 +17,16 @@ namespace Code.Scenes
         {
             FindObjectOfType<CameraVisual>().SetCameraBackgroundColor(Color.white);
             FindObjectOfType<CameraSize>().SetCameraSize(5f, 1f);
+        }
+
+        private void CheckPlatform()
+        {
+            RuntimePlatform usedPlatform = Application.platform;
+
+            if (usedPlatform == RuntimePlatform.WindowsPlayer)
+            {
+                Screen.SetResolution(1080 / 2, 1920 / 2, false);
+            }
         }
 
         public void ScreenClicked()

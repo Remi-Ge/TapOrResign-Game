@@ -1,8 +1,6 @@
-using System;
 using Code.CameraPrefab;
 using Code.PersistentObject;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 namespace Code.Scenes
