@@ -6,7 +6,10 @@ namespace Code.LevelEditor
 {
     public class EditorControl : MonoBehaviour
     {
+        [SerializeField] private GameObject[] controlBars; //objectsBar triggersBar players
         [SerializeField] private ScrollRect levelScrollRect;
+        [SerializeField] private GameObject deleteOverlay;
+        private int _selectedBar;
         private float _worldDistanceRatio;
         private Transform _mainCamera;
 
@@ -23,6 +26,12 @@ namespace Code.LevelEditor
         private void Update()
         {
             UpdateCameraPosition();
+            ChecksInputs();
+        }
+
+        public void DeleteButtonClicked()
+        {
+            deleteOverlay.SetActive(!deleteOverlay.activeSelf);
         }
 
         private void UpdateCameraPosition()
@@ -34,9 +43,30 @@ namespace Code.LevelEditor
             //stop the scroller if it's at 0
             if (levelScrollRect.content.anchoredPosition.y > 0)
             {
+                //stop completely the scroll rect
                 levelScrollRect.velocity = Vector2.zero;
                 levelScrollRect.content.anchoredPosition = new Vector2(0, 0);
             }
+        }
+
+        public void ChangeSelectedBar()
+        {
+            _selectedBar += 1;
+
+            if (_selectedBar >= controlBars.Length)
+            {
+                _selectedBar = 0;
+            }
+
+            for (int i = 0; i < controlBars.Length; i++)
+            {
+                controlBars[i].SetActive(_selectedBar == i);
+            }
+        }
+
+        private void ChecksInputs()
+        {
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 using Code.CameraPrefab;
+using Code.LevelEditor;
 using Code.PersistentObject;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace Code.Scenes
 
         public void DeleteButton()
         {
-            
+            GetComponent<EditorControl>().DeleteButtonClicked();
         }
 
         public void SettingsButton()
@@ -32,6 +33,11 @@ namespace Code.Scenes
         public void PlayButton()
         {
             Persistent.GetPersistentObject().GetComponent<Transitions>().ChangeSceneWithTransition("EditorPlayScene", 0, 0, 0.5f);
+        }
+
+        public void ChangeSelectedBar()
+        {
+            GetComponent<EditorControl>().ChangeSelectedBar();
         }
     }
 }
