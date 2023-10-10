@@ -167,6 +167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd25eba53c52fd74cada21868c658d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ownedSkinsTransforms:
+  - {fileID: 1724051843}
+  - {fileID: 597309824}
+  - {fileID: 1767806142}
+  - {fileID: 1640744793}
+  - {fileID: 1490266592}
 --- !u!1001 &350434609
 PrefabInstance:
   m_ObjectHideFlags: 0

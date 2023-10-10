@@ -5,6 +5,15 @@ namespace Code.CameraPrefab
 {
     public class CameraSize : MonoBehaviour
     {
+        public float ScreenToWorldDistance(float screenDistance)
+        {
+            //calculate 2 points for distance
+            float firstXWorldPoint = ScreenToWorldPoint(new Vector2(0, 0)).x;
+            float secondXWorldPoint = ScreenToWorldPoint(new Vector2(1, 0)).x;
+            //calculate the distance for screenDistance
+            return (secondXWorldPoint - firstXWorldPoint) * screenDistance;
+        }
+        
         public Vector2 ScreenToWorldPoint(Vector2 screenPoint)
         {
             Vector2 worldPoint = GetComponent<Camera>().ScreenToWorldPoint(screenPoint);
