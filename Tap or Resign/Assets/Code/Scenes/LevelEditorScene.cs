@@ -39,5 +39,10 @@ namespace Code.Scenes
         {
             GetComponent<EditorControl>().ChangeSelectedBar();
         }
+
+        public void SelectItem(int itemIndex)
+        {
+            GetComponent<EditorControl>().ItemButtonClicked(itemIndex);
+        }
     }
 }

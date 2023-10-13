@@ -1,4 +1,5 @@
 using System.Collections;
+using Code.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,7 @@ namespace Code.PersistentObject
             }
             
             //get the canvas in the scene
-            Canvas canvas = FindObjectOfType<Canvas>();
+            MainCanvas canvas = FindObjectOfType<MainCanvas>();
             
             //return null if there is no canvas
             if (canvas == null)

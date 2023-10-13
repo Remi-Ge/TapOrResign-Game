@@ -1,3 +1,4 @@
+using System;
 using Code.CameraPrefab;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +7,20 @@ namespace Code.LevelEditor
 {
     public class EditorControl : MonoBehaviour
     {
+        //references
         [SerializeField] private GameObject[] controlBars; //objectsBar triggersBar players
+        [SerializeField] private AnimatorsList[] itemsAnimators;
         [SerializeField] private ScrollRect levelScrollRect;
         [SerializeField] private GameObject deleteOverlay;
+        //selected item
+        private SelectedItemStruct _selectedItem = new SelectedItemStruct() 
+        {
+            SelectedItemIndex = -1,
+            SelectedItemBarIndex = -1
+        };
+        //variables
         private int _selectedBar;
+        //constants
         private float _worldDistanceRatio;
         private Transform _mainCamera;
 
@@ -62,11 +73,67 @@ namespace Code.LevelEditor
             {
                 controlBars[i].SetActive(_selectedBar == i);
             }
+            
+            SetAnimatorEnabled(true, _selectedItem.SelectedItemIndex, _selectedItem.SelectedItemBarIndex);
+        }
+
+        public void ItemButtonClicked(int itemIndex)
+        {
+            if ((_selectedItem.SelectedItemBarIndex == _selectedBar && _selectedItem.SelectedItemIndex >= 0)
+                || (itemIndex == _selectedItem.SelectedItemIndex && _selectedBar == _selectedItem.SelectedItemBarIndex))
+            {
+                SetAnimatorEnabled(false, _selectedItem.SelectedItemIndex, _selectedItem.SelectedItemBarIndex);
+            }
+
+            if (itemIndex == _selectedItem.SelectedItemIndex && _selectedBar == _selectedItem.SelectedItemBarIndex)
+            {
+                _selectedItem = new SelectedItemStruct()
+                {
+                    SelectedItemIndex = -1,
+                    SelectedItemBarIndex = -1
+                };
+            }
+            else
+            {
+                _selectedItem = new SelectedItemStruct()
+                {
+                    SelectedItemIndex = itemIndex,
+                    SelectedItemBarIndex = _selectedBar
+                };
+            }
+
+            if (_selectedItem.SelectedItemBarIndex == _selectedBar && _selectedItem.SelectedItemIndex >= 0)
+            {
+                SetAnimatorEnabled(true, itemIndex, _selectedBar);
+            }
+        }
+
+        private void SetAnimatorEnabled(bool isActive, int itemIndex, int barIndex)
+        {
+            if (itemIndex < 0 || barIndex < 0)
+            {
+                return;
+            }
+            
+            itemsAnimators[barIndex].animatorList[itemIndex]
+                .SetBool(Animator.StringToHash("isSelected"), isActive);
         }
 
         private void ChecksInputs()
         {
             
+        }
+
+        private struct SelectedItemStruct
+        {
+            public int SelectedItemIndex;
+            public int SelectedItemBarIndex;
+        }
+
+        [Serializable]
+        private struct AnimatorsList
+        {
+            public Animator[] animatorList;
         }
     }
 }
