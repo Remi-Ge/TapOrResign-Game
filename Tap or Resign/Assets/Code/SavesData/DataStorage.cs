@@ -5,6 +5,7 @@ namespace Code.SavesData
 {
     public static class DataStorage
     {
-        private static string _savingDirectory = Path.Combine(Application.persistentDataPath, "savedData");
+        private static readonly string SavingDirectory = Path.Combine(Application.persistentDataPath, "savedData");
+        
     }
 }

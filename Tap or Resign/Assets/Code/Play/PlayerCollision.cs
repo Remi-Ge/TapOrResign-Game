@@ -5,6 +5,8 @@ namespace Code.Play
 {
     public class PlayerCollision : MonoBehaviour
     {
+        private int _waterTriggers;
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
             //check if deadly
