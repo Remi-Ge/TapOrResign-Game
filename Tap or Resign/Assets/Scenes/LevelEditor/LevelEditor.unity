@@ -1992,7 +1992,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619554417
 GameObject:
@@ -3887,7 +3887,7 @@ Transform:
   - {fileID: 297157959}
   - {fileID: 830780500}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290412352
 GameObject:
@@ -6533,6 +6533,7 @@ GameObject:
   - component: {fileID: 1891103010}
   - component: {fileID: 1891103011}
   - component: {fileID: 1891103012}
+  - component: {fileID: 1891103013}
   m_Layer: 0
   m_Name: levelEditorScene
   m_TagString: Untagged
@@ -6598,6 +6599,24 @@ MonoBehaviour:
     - {fileID: 1549897853}
   levelScrollRect: {fileID: 1925267057}
   deleteOverlay: {fileID: 1315992597}
+--- !u!114 &1891103013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891103009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11403f16c5ad78442baf49e991c1b866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPositionsTransform:
+  - {fileID: 1290412353}
+  - {fileID: 1908591365}
+  - {fileID: 1128793113}
+  - {fileID: 297157959}
+  - {fileID: 830780500}
 --- !u!1 &1891111435
 GameObject:
   m_ObjectHideFlags: 0
@@ -7082,7 +7101,7 @@ RectTransform:
   - {fileID: 1891111436}
   - {fileID: 619554418}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
