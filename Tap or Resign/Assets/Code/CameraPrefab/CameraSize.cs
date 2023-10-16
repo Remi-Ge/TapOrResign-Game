@@ -9,9 +9,9 @@ namespace Code.CameraPrefab
         {
             //calculate 2 points for distance
             float firstXWorldPoint = ScreenToWorldPoint(new Vector2(0, 0)).x;
-            float secondXWorldPoint = ScreenToWorldPoint(new Vector2(1, 0)).x;
+            float secondXWorldPoint = ScreenToWorldPoint(new Vector2(screenDistance, 0)).x;
             //calculate the distance for screenDistance
-            return (secondXWorldPoint - firstXWorldPoint) * screenDistance;
+            return secondXWorldPoint - firstXWorldPoint;
         }
         
         public Vector2 ScreenToWorldPoint(Vector2 screenPoint)

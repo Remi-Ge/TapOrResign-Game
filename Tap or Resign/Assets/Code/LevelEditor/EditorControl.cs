@@ -31,7 +31,7 @@ namespace Code.LevelEditor
 
         private void Start()
         {
-            _worldDistanceRatio = FindObjectOfType<CameraSize>().ScreenToWorldDistance(1);
+            _worldDistanceRatio = _mainCamera.GetComponent<CameraSize>().ScreenToWorldDistance(1);
         }
 
         private void Update()
