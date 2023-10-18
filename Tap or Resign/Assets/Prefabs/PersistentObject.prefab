@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2400107936927214986}
   - component: {fileID: 7183324459138282950}
   - component: {fileID: 1711847612578406653}
+  - component: {fileID: 1522465294881616495}
   m_Layer: 0
   m_Name: PersistentObject
   m_TagString: Untagged
@@ -94,3 +95,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33be1a900ee46d894b0ac903d3b5ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1522465294881616495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169011773498647181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993568f70fd44271a99f9c6fa7a03735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesPrefabs:
+  - {fileID: 5006381100198094819, guid: a2ee76801511e68429f2c2bec1e8b35c, type: 3}
+  - {fileID: 5006381100198094819, guid: 9eb3b98bbf47fcc448a8f4e6efaa99a1, type: 3}
+  - {fileID: 5006381100198094819, guid: f14a7df2184dfed458894194c85462b3, type: 3}
+  - {fileID: 5006381100198094819, guid: 8c288e3ebeacd6848a6aa4a0194277e5, type: 3}
+  - {fileID: 5006381100198094819, guid: 3097a90d54cba784086aa4f2b95226fc, type: 3}
+  - {fileID: 5006381100198094819, guid: 73163edf4fd6dac4c88c4a66af66d61d, type: 3}

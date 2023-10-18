@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,6 +46,46 @@ namespace Code.PersistentObject
             
 
             return beganTouches;
+        }
+
+        public Vector2 GetTouchCoordinates(int fingerId)
+        {
+            //the fingers
+            int fingerIndex = Array.FindIndex(Input.touches, touch => touch.fingerId == fingerId);
+            //if there is no fingers return 0 0
+            if (fingerIndex == -1)
+            {
+                return Vector2.zero;
+            }
+            //return the screen position
+            return Input.touches[fingerIndex].position;
+        }
+        
+        public bool DoesTouchExists(int fingerId)
+        {
+            int targetTouchId;
+            if (_usedPlatform == RuntimePlatform.WindowsPlayer)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    targetTouchId = 0;
+                }
+                else
+                {
+                    targetTouchId = -1;
+                }
+            }
+            else
+            {
+                targetTouchId = Array.FindIndex(Input.touches, touch => touch.fingerId == fingerId);
+            }
+            
+
+            if (targetTouchId == -1)
+            {
+                return false;
+            }
+            return true;
         }
 
         public struct TouchStruct

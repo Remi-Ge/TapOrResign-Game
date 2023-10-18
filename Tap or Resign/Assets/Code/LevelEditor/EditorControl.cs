@@ -37,7 +37,6 @@ namespace Code.LevelEditor
         private void Update()
         {
             UpdateCameraPosition();
-            ChecksInputs();
         }
 
         public void DeleteButtonClicked()
@@ -117,11 +116,6 @@ namespace Code.LevelEditor
             
             itemsAnimators[barIndex].animatorList[itemIndex]
                 .SetBool(Animator.StringToHash("isSelected"), isActive);
-        }
-
-        private void ChecksInputs()
-        {
-            
         }
 
         private struct SelectedItemStruct

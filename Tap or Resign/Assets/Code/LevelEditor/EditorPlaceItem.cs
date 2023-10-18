@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Code.CameraPrefab;
+using Code.PersistentObject;
 using UnityEngine;
 
 namespace Code.LevelEditor
@@ -5,25 +8,95 @@ namespace Code.LevelEditor
     public class EditorPlaceItem : MonoBehaviour
     {
         [SerializeField] private Transform[] startPositionsTransform;
-        private bool _isPlacing;
-        private bool _isDeleting;
+        private int _currentState = 1; //0 nothing 1 placing 2 deleting
+        private Touches.TouchStruct _usedTouch;
+        private Vector2 _lastSnappedPosition = Vector2.zero;
+        private CameraSize _cameraSize;
 
-        public void SetActionToNothing()
+        private void Awake()
         {
-            _isPlacing = false;
-            _isDeleting = false;
+            ClearUsedTouch();
+            _cameraSize = FindObjectOfType<CameraSize>();
+        }
+
+        public void ClearState()
+        {
+            _currentState = 0;
+        }
+
+        public void SetStateToPlace()
+        {
+            _currentState = 1;
+        }
+
+        public void SetStateToDelete()
+        {
+            _currentState = 2;
+        }
+
+        private void ClearUsedTouch()
+        {
+            _usedTouch = new Touches.TouchStruct()
+            {
+                FingerId = -1,
+                ScreenPosition = Vector2.zero
+            };
+        }
+
+        private void Update()
+        {
+            CheckInputs();
+        }
+
+        private void CheckInputs()
+        {
+            if (_usedTouch.FingerId != -1)
+            {
+                if (!Persistent.GetPersistentObject().GetComponent<Touches>().DoesTouchExists(_usedTouch.FingerId))
+                {
+                    ClearUsedTouch();
+                }
+            }
+            
+            
+            //if there is already a finger return
+            if (_usedTouch.FingerId != -1)
+            {
+                PlaceItem();
+                return;
+            }
+            
+            if (_currentState != 0)
+            {
+                List<Touches.TouchStruct> beganTouches = Persistent.GetPersistentObject()
+                    .GetComponent<Touches>().GetBeganTouches();
+                if (beganTouches.Count != 0)
+                {
+                    //new input started
+                    _usedTouch = beganTouches[0];
+                    PlaceItem();
+                }
+            }
+        }
+
+        private Vector2 CalculatePosition(Vector2 screenPosition)
+        {
+            Vector2 worldPosition = _cameraSize.ScreenToWorldPoint(screenPosition);
+            return worldPosition;
         }
         
-        public void SetActionToPlacing()
+        private void PlaceItem()
         {
-            _isPlacing = true;
-            _isDeleting = false;
-        }
+            if (_usedTouch.FingerId == -1)
+            {
+                return;
+            }
 
-        public void SetActionToDeleting()
-        {
-            _isPlacing = false;
-            _isDeleting = true;
+            Vector2 screenPosition = Persistent.GetPersistentObject().GetComponent<Touches>()
+                .GetTouchCoordinates(_usedTouch.FingerId);
+            Vector2 worldPosition = _cameraSize.ScreenToWorldPoint(screenPosition);
+            Instantiate(Persistent.GetPersistentObject().GetComponent<ObstaclesReferences>().obstaclesPrefabs[0]
+                , worldPosition, Quaternion.identity);
         }
     }
 }
