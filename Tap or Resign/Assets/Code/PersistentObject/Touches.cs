@@ -50,15 +50,35 @@ namespace Code.PersistentObject
 
         public Vector2 GetTouchCoordinates(int fingerId)
         {
-            //the fingers
-            int fingerIndex = Array.FindIndex(Input.touches, touch => touch.fingerId == fingerId);
-            //if there is no fingers return 0 0
-            if (fingerIndex == -1)
+            Vector2 touchPosition;
+            //pc
+            if (_usedPlatform == RuntimePlatform.WindowsPlayer)
             {
-                return Vector2.zero;
+                if (Input.GetMouseButton(0))
+                {
+                    touchPosition = Input.mousePosition;
+                }
+                else
+                {
+                    touchPosition = Vector2.zero;
+                }
+            }
+            else
+            {
+                //the fingers
+                int fingerIndex = Array.FindIndex(Input.touches, touch => touch.fingerId == fingerId);
+                //if there is no fingers return 0 0
+                if (fingerIndex == -1)
+                {
+                    touchPosition = Vector2.zero;
+                }
+                else
+                {
+                    touchPosition = Input.touches[fingerIndex].position;
+                }
             }
             //return the screen position
-            return Input.touches[fingerIndex].position;
+            return touchPosition;
         }
         
         public bool DoesTouchExists(int fingerId)

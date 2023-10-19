@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.CameraPrefab;
 using Code.PersistentObject;
@@ -12,6 +13,7 @@ namespace Code.LevelEditor
         private Touches.TouchStruct _usedTouch;
         private Vector2 _lastSnappedPosition = Vector2.zero;
         private CameraSize _cameraSize;
+        private int _levelWidth = 5;
 
         private void Awake()
         {
@@ -82,7 +84,18 @@ namespace Code.LevelEditor
         private Vector2 CalculatePosition(Vector2 screenPosition)
         {
             Vector2 worldPosition = _cameraSize.ScreenToWorldPoint(screenPosition);
-            return worldPosition;
+            Vector2 snappedPosition;
+            if (_levelWidth % 2 == 0)
+            {
+                snappedPosition = new Vector2((float)Math.Round((worldPosition.x-2.5f) / 5f) * 5 + 2.5f
+                    , (float)Math.Round((worldPosition.y-2.5f) / 5f) * 5 + 2.5f);
+            }
+            else
+            {
+                snappedPosition = new Vector2((float)Math.Round(worldPosition.x / 5f) * 5
+                    , (float)Math.Round(worldPosition.y / 5f) * 5);
+            }
+            return snappedPosition;
         }
         
         private void PlaceItem()
@@ -91,12 +104,16 @@ namespace Code.LevelEditor
             {
                 return;
             }
-
+            
             Vector2 screenPosition = Persistent.GetPersistentObject().GetComponent<Touches>()
                 .GetTouchCoordinates(_usedTouch.FingerId);
-            Vector2 worldPosition = _cameraSize.ScreenToWorldPoint(screenPosition);
-            Instantiate(Persistent.GetPersistentObject().GetComponent<ObstaclesReferences>().obstaclesPrefabs[0]
-                , worldPosition, Quaternion.identity);
+            GameObject newObject = Instantiate(Persistent.GetPersistentObject().GetComponent<ObstaclesReferences>().obstaclesPrefabs[0]
+                , CalculatePosition(screenPosition), Quaternion.identity);
+            Rigidbody2D newObjectRb = newObject.GetComponent<Rigidbody2D>();
+            if (newObjectRb != null)
+            {
+                Destroy(newObjectRb);
+            }
         }
     }
 }
