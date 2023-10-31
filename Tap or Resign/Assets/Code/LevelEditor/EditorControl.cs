@@ -27,6 +27,7 @@ namespace Code.LevelEditor
         private void Awake()
         {
             _mainCamera = FindObjectOfType<Camera>().transform;
+            SetScrollbarActive(true);
         }
 
         private void Start()
@@ -76,6 +77,11 @@ namespace Code.LevelEditor
             SetAnimatorEnabled(true, _selectedItem.SelectedItemIndex, _selectedItem.SelectedItemBarIndex);
         }
 
+        private void SetScrollbarActive(bool isEnabled)
+        {
+            levelScrollRect.vertical = isEnabled;
+        }
+
         public void ItemButtonClicked(int itemIndex)
         {
             if ((_selectedItem.SelectedItemBarIndex == _selectedBar && _selectedItem.SelectedItemIndex >= 0)
@@ -91,6 +97,8 @@ namespace Code.LevelEditor
                     SelectedItemIndex = -1,
                     SelectedItemBarIndex = -1
                 };
+                SetScrollbarActive(true);
+                GetComponent<EditorPlaceItem>().ClearState();
             }
             else
             {
@@ -99,6 +107,8 @@ namespace Code.LevelEditor
                     SelectedItemIndex = itemIndex,
                     SelectedItemBarIndex = _selectedBar
                 };
+                SetScrollbarActive(false);
+                GetComponent<EditorPlaceItem>().SetStateToPlace();
             }
 
             if (_selectedItem.SelectedItemBarIndex == _selectedBar && _selectedItem.SelectedItemIndex >= 0)

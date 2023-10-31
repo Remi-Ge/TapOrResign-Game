@@ -9,9 +9,9 @@ namespace Code.LevelEditor
     public class EditorPlaceItem : MonoBehaviour
     {
         [SerializeField] private Transform[] startPositionsTransform;
-        private int _currentState = 1; //0 nothing 1 placing 2 deleting
+        private int _currentState = 0; //0 nothing 1 placing 2 deleting
         private Touches.TouchStruct _usedTouch;
-        private Vector2 _lastSnappedPosition = Vector2.zero;
+        private Vector2 _lastSnappedPosition = new Vector2(0.2f, 0.2f); //random value that cannot be normally"
         private CameraSize _cameraSize;
         private int _levelWidth = 5;
 
@@ -56,6 +56,7 @@ namespace Code.LevelEditor
             {
                 if (!Persistent.GetPersistentObject().GetComponent<Touches>().DoesTouchExists(_usedTouch.FingerId))
                 {
+                    _lastSnappedPosition = new Vector2(0.2f, 0.2f); //reset the last snapped position
                     ClearUsedTouch();
                 }
             }
@@ -68,7 +69,7 @@ namespace Code.LevelEditor
                 return;
             }
             
-            if (_currentState != 0)
+            if (_currentState == 1)
             {
                 List<Touches.TouchStruct> beganTouches = Persistent.GetPersistentObject()
                     .GetComponent<Touches>().GetBeganTouches();
@@ -107,8 +108,20 @@ namespace Code.LevelEditor
             
             Vector2 screenPosition = Persistent.GetPersistentObject().GetComponent<Touches>()
                 .GetTouchCoordinates(_usedTouch.FingerId);
+
+            Vector2 snappedPosition = CalculatePosition(screenPosition);
+            
+            if (_lastSnappedPosition == snappedPosition)
+            {
+                return;
+            }
+            else
+            {
+                _lastSnappedPosition = snappedPosition;
+            }
+            
             GameObject newObject = Instantiate(Persistent.GetPersistentObject().GetComponent<ObstaclesReferences>().obstaclesPrefabs[0]
-                , CalculatePosition(screenPosition), Quaternion.identity);
+                , snappedPosition, Quaternion.identity);
             Rigidbody2D newObjectRb = newObject.GetComponent<Rigidbody2D>();
             if (newObjectRb != null)
             {
